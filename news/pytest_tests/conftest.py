@@ -84,11 +84,6 @@ def comments(db, news, author):
 
 
 @pytest.fixture
-def clear_comments(db):
-    Comment.objects.all().delete()
-
-
-@pytest.fixture
 def url_to_comments(detail_url):
     url_to_comments = detail_url + '#comments'
     return url_to_comments
@@ -115,16 +110,6 @@ def home_url():
 def detail_url(news):
     """Сохраняем в переменную адрес страницы с новостью."""
     return reverse('news:detail', args=(news.id,))
-
-
-@pytest.fixture
-def edit_url():
-    return reverse('news:edit', args=(news.id,))
-
-
-@pytest.fixture
-def delete_url():
-    return reverse('news:delete', args=(news.id,))
 
 
 @pytest.fixture

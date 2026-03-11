@@ -22,7 +22,6 @@ def test_anonymous_user_cant_create_comment(
     assert comments_count == first_comments_count
 
 
-@pytest.mark.usefixtures('clear_comments')
 def test_user_can_create_comment(
         author_client,
         detail_url,
@@ -30,6 +29,7 @@ def test_user_can_create_comment(
         author,
 ):
     """Проверка POST-запросов на добавление комментариев автооризованым"""
+    Comment.objects.all().delete()
     form_data = {'text': COMMENT_TEXT}
     first_comments_count = Comment.objects.count()
     response = author_client.post(detail_url, data=form_data)
